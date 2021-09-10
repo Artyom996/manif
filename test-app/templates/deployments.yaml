@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "test-app.podname" .}}
+  labels:
+    app: {{ template "test-app.name" .}}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+spec:
+  replicas: {{ .Values.replica }}
+  selector:
+    matchLabels:
+      app: {{ template "test-app.name" .}}
+      chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+      release: "{{ .Release.Name }}"
+  template:
+    metadata:
+      labels:
+        app: {{ template "test-app.name" .}}
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+        release: "{{ .Release.Name }}"
+    spec:
+      containers:
+        - name: {{ template "test-app.name" .}}
+          image: {{ .Values.repo }}:{{ .Values.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          livenessProbe:
+            tcpSocket:
+              port: 9000
+            initialDelaySeconds: 240
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health_check
+              port: 9000
+            initialDelaySeconds: 120
+            periodSeconds: 10   

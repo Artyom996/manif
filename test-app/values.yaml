@@ -1,0 +1,17 @@
+name: test-app
+port: 9000
+
+repoName: 4836297/pro
+tag: latest
+replica: 1
+
+image:
+  pullPolicy: IfNotPresent
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
