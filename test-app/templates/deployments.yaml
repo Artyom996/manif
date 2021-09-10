@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: test-app
-          image: {{ .Values.repo }}:{{ .Values.tag }}
+          image: 4836297/pro:latest
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           livenessProbe:
             tcpSocket:
