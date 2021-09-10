@@ -22,16 +22,4 @@ spec:
     spec:
       containers:
         - name: test-app
-          image: 4836297/pro:latest
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          livenessProbe:
-            tcpSocket:
-              port: 9000
-            initialDelaySeconds: 240
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /health_check
-              port: 9000
-            initialDelaySeconds: 120
-            periodSeconds: 10   
+          image: 4836297/pro:latest 
