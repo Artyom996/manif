@@ -3,25 +3,25 @@ kind: Deployment
 metadata:
   name: test-app
   labels:
-    app: {{ template "test-app.name" .}}
+    app: test-app
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
 spec:
   replicas: {{ .Values.replica }}
   selector:
     matchLabels:
-      app: {{ template "test-app.name" .}}
+      app: test-app
       chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
       release: "{{ .Release.Name }}"
   template:
     metadata:
       labels:
-        app: {{ template "test-app.name" .}}
+        app: test-app
         chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
         release: "{{ .Release.Name }}"
     spec:
       containers:
-        - name: {{ template "test-app.name" .}}
+        - name: test-app
           image: {{ .Values.repo }}:{{ .Values.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           livenessProbe:
