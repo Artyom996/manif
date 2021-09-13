@@ -3,12 +3,12 @@ apiVersion: v1
 metadata:
   name: test-app-svc
   labels:
-    app: "{{ .Chart.Name }}"
+    app: {{ template "test-app.name" .}}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
 spec:
   selector:
-    app: "{{ .Chart.Name }}"
+    app: {{ template "test-app.name" .}}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
   ports:
