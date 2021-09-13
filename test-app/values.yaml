@@ -5,7 +5,7 @@ targetPort: 80
 
 repoName: 4836297/pro
 tag: latest
-replica: 1
+replica: 2
 
 ingress:
   path: /
