@@ -1,5 +1,7 @@
 name: test-app
 port: 9000
+nodeport: 30007
+targetport: 80
 
 repoName: 4836297/pro
 tag: latest

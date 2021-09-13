@@ -1,14 +1,14 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: test-app-svc
+  name: "{{ .Chart.Name }}"-svc
   labels:
-    app: test-app
+    app: "{{ .Chart.Name }}"
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
 spec:
   selector:
-    app: test-app
+    app: "{{ .Chart.Name }}"
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
   ports:
