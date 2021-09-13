@@ -7,6 +7,10 @@ repoName: 4836297/pro
 tag: latest
 replica: 1
 
+ingress:
+  path: /
+  host: test-app.com
+
 image:
   pullPolicy: IfNotPresent
 
