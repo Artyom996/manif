@@ -11,6 +11,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
     argocd.argoproj.io/sync-options: Validate=false
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   - host: {{ .Values.ingress.host }}
     http:
