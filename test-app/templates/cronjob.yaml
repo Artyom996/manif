@@ -1,0 +1,71 @@
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: {{ .Release.Name }}
+  name: test-app-restart
+rules:
+- apiGroups:
+  - extensions
+  - apps
+  resources:
+  - deployments
+  - replicasets
+  verbs:
+  - 'patch'
+  - 'get'
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: test-app-restart
+  namespace: {{ .Release.Name }}
+subjects:
+- kind: ServiceAccount
+  name: sa-test-app-restart
+  namespace: {{ .Release.Name }}
+roleRef:
+  kind: Role
+  name: test-app-restart
+  apiGroup: ""
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sa-test-app-restart
+  namespace: {{ .Release.Name }}
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: restart-test-app
+  namespace: {{ .Release.Name }}
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: sa-test-app-restart
+          tolerations:
+            - effect: NoSchedule
+              key: cattle.io/os
+              operator: Equal
+              value: linux
+          containers:
+          - name: kubectl
+            image: garland/kubectl:1.10.4
+            command:
+            - /bin/sh
+            - -c
+            - kubectl patch deployment test-app -p '{"spec":{"template":{"metadata":{"labels":{"restarted-by":"'${POD_NAME}'"}}}}}'
+            env:
+              - name: POD_NAME
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.name
+          restartPolicy: OnFailure
+
+
+
+          ##НЕобходимо сделать tolerations
