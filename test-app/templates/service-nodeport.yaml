@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: test-app-svc-nodeport
+  labels:
+    app: test-app
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+spec:
+  type: NodePort
+  selector:
+    app: test-app
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30007
