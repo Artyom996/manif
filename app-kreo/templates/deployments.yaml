@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-kreo
+  labels:
+    app: app-kreo
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+spec:
+  replicas: {{ .Values.replica }}
+  selector:
+    matchLabels:
+      app: app-kreo
+      chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+      release: "{{ .Release.Name }}"
+  template:
+    metadata:
+      labels:
+        app: app-kreo
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+        release: "{{ .Release.Name }}"
+    spec:
+      containers:
+        - name: app-kreo
+          image: 4836297/pro:latest 
