@@ -5,7 +5,8 @@ targetPort: 80
 
 repoName: 4836297/maintenance
 tag: finish
-replica: 2
+replica: 1
+
 
 ingress:
   path: /
