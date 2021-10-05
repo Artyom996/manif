@@ -1,0 +1,71 @@
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: default
+  name: kreo-app-restart
+rules:
+- apiGroups:
+  - extensions
+  - apps
+  resources:
+  - deployments
+  - replicasets
+  verbs:
+  - 'patch'
+  - 'get'
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: kreo-app-restart
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: sa-kreo-app-restart
+  namespace: default
+roleRef:
+  kind: Role
+  name: kreo-app-restart
+  apiGroup: ""
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sa-kreo-app-restart
+  namespace: default
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: restart-kreo-app
+  namespace: default
+spec:
+  schedule: "0 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: sa-kreo-app-restart
+          tolerations:
+            - effect: NoSchedule
+              key: cattle.io/os
+              operator: Equal
+              value: linux
+          containers:
+          - name: kubectl
+            image: garland/kubectl:1.10.4
+            command:
+            - /bin/sh
+            - -c
+            - kubectl patch deployment kreo-app -p '{"spec":{"template":{"metadata":{"labels":{"restarted-by":"'${POD_NAME}'"}}}}}'
+            env:
+              - name: POD_NAME
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.name
+          restartPolicy: OnFailure
+
+
+
+          ##НЕобходимо сделать tolerations

@@ -1,0 +1,23 @@
+name: kreo-app
+port: 9009
+nodePort: 30009
+targetPort: 80
+
+repoName: 4836297/maintenance
+tag: finish
+replica: 2
+
+ingress:
+  path: /
+  host: kreo-app.com
+
+image:
+  pullPolicy: IfNotPresent
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
