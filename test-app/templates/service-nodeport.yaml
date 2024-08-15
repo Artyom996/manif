@@ -1,4 +1,4 @@
-{{- if eq .Values.nodeport.enabled }}
+{{- if .Values.nodeport.enabled }}
 kind: Service
 apiVersion: v1
 metadata:
