@@ -22,6 +22,6 @@ spec:
     spec:
       containers:
         - name: test-app
-          image: 4836297/pro:latest
+          image: {{ .Values.repoName }}:{{ .Values.tag }}
           ports:
             - containerPort: 3000   
