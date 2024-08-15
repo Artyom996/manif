@@ -16,7 +16,7 @@ rules:
   - 'get'
 ---
 kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: test-app-restart
   namespace: default
@@ -35,7 +35,7 @@ metadata:
   name: sa-test-app-restart
   namespace: default
 ---
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: restart-test-app
@@ -47,11 +47,6 @@ spec:
       template:
         spec:
           serviceAccountName: sa-test-app-restart
-          tolerations:
-            - effect: NoSchedule
-              key: cattle.io/os
-              operator: Equal
-              value: linux
           containers:
           - name: kubectl
             image: garland/kubectl:1.10.4
