@@ -22,4 +22,6 @@ spec:
     spec:
       containers:
         - name: test-app
-          image: 4836297/pro:latest 
+          image: 4836297/pro:latest
+          ports:
+            - containerPort: 3000   
