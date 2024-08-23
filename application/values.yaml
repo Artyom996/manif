@@ -1,0 +1,26 @@
+name: flask-app
+port: 3000
+nodePort: 30007
+targetPort: 80
+
+repoName: 4836297/pro
+tag: latest
+replica: 2
+
+ingress:
+  path: /
+  host: test-app.com
+
+image:
+  pullPolicy: IfNotPresent
+
+nodeport:
+  enabled: false
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
