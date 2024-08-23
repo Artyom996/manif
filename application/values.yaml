@@ -3,8 +3,8 @@ port: 3000
 nodePort: 30007
 targetPort: 80
 
-repoName: my-flask-app
-tag: latest
+repoName: 4836297/blue-green-test
+tag: application
 replica: 2
 
 ingress:
