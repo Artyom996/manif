@@ -4,7 +4,7 @@ nodePort: 30007
 targetPort: 80
 
 repoName: 4836297/blue-green-test
-tag: application
+tag: application2
 replica: 2
 
 ingress:
