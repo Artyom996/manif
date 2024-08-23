@@ -13,5 +13,5 @@ spec:
     release: "{{ .Release.Name }}"
   ports:
   - protocol: TCP
-    port: {{ .Values.port }}
+    port: 3000
     targetPort: 3000
