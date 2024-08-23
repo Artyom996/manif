@@ -3,7 +3,7 @@ port: 3000
 nodePort: 30007
 targetPort: 80
 
-repoName: 4836297/pro
+repoName: my-flask-app
 tag: latest
 replica: 2
 
