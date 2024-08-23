@@ -19,7 +19,7 @@ spec:
             - containerPort: 5000
           env:
             - name: DATABASE_URL
-              value: "postgresql://username:password@postgres.application.svc.cluster.local:5432/mydatabase"
+              value: "postgresql://username:password@postgres.application.svc.cluster.local:5432/postgres"
 ---
 apiVersion: v1
 kind: Service
