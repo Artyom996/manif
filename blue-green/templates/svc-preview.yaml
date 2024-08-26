@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: {{ template "blue-green.name" .}}-preview
+  name: blue-green-preview
 spec:
   selector:
-    app: {{ template "blue-green.name" .}}
+    app: blue-green
   ports:
   - protocol: TCP
     port: {{ .Values.port }}
