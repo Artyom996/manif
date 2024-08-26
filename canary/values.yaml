@@ -3,7 +3,7 @@ port: 80
 targetPort: 80
 
 repoName: 4836297/blue-green-test
-tag: canary-onee
+tag: canary-twoo
 replica: 2
 
 ingress:
