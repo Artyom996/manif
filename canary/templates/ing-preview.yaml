@@ -1,0 +1,23 @@
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: ing-preview
+#   annotations:
+#     kubernetes.io/ingress.class: nginx
+# spec:
+#   ingressClassName: nginx
+#   rules:
+#   - host: bg-preview.local
+#     http:
+#       paths:
+#       - pathType: Prefix
+#         path: /
+#         backend:
+#           service:
+#             name: canary-preview
+#             port:
+#               number: {{ .Values.port }}
+#   # tls:
+#   # - hosts:
+#   #   - argocd.local
+#   #   secretName: argocd-tls
