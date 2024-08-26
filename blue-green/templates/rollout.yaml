@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: rollouts-demo
-        image: {{ .Values.repo }}:{{ .Values.tag }}
+        image: {{ .Values.repoName }}:{{ .Values.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: {{ .Values.port }}
