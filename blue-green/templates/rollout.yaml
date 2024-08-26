@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: {{ template "blue-green.name" .}}
+spec:
+  replicas: 2
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: {{ template "blue-green.name" .}}
+  template:
+    metadata:
+      labels:
+        app: {{ template "blue-green.name" .}}
+    spec:
+      containers:
+      - name: rollouts-demo
+        image: {{ .Values.repo }}:{{ .Values.tag }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.port }}
+  strategy:
+    blueGreen: 
+      activeService: {{ template "blue-green.name" .}}-active
+      previewService: {{ template "blue-green.name" .}}-preview
+      autoPromotionEnabled: false
