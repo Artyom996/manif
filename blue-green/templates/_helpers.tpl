@@ -1,1 +1,0 @@
-{{- define "blue-green.name" -}}
