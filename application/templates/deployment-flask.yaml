@@ -20,15 +20,3 @@ spec:
           env:
             - name: DATABASE_URL
               value: "postgresql://username:password@postgres.application.svc.cluster.local:5432/postgres"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: flask-service
-spec:
-  type: ClusterIP
-  ports:
-    - port: 80
-      targetPort: 5000
-  selector:
-    app: {{ .Values.name }}
