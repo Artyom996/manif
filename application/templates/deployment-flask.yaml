@@ -18,5 +18,15 @@ spec:
           ports:
             - containerPort: 5000
           env:
-            - name: DATABASE_URL
-              value: "postgresql://username:password@postgres.application.svc.cluster.local:5432/postgres"
+          - name: POSTGRES_USER
+            value: "username"
+          - name: POSTGRES_PASSWORD
+            value: "password"
+          - name: POSTGRES_DB
+            value: "postgres"
+          - name: POSTGRES_HOST
+            value: "postgres.application.svc.cluster.local"
+          - name: POSTGRES_PORT
+            value: "5432"
+          - name: DATABASE_URL
+            value: "postgresql://username:password@postgres.application.svc.cluster.local:5432/postgres"
