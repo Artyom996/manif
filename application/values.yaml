@@ -4,7 +4,7 @@ nodePort: 30007
 targetPort: 80
 
 repoName: 4836297/postgres-application
-tag: latest
+tag: vac
 replica: 2
 
 ingress:
